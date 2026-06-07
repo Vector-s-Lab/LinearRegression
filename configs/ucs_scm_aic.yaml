@@ -1,0 +1,48 @@
+# Experiment: UCS-SCM dataset with AIC characteristic function
+# 15 features, 437 samples — exact_shapley disabled (O(2^15) too slow)
+dataset: ucs_scm
+
+model:
+  type: LinearRegression
+  params: {}
+  train_test_split:
+    test_size: 0.2
+    random_state: 42
+
+characteristic_function: aic
+
+explainers:
+  exact_cis:
+    enabled: true
+  exact_shapley:
+    enabled: true
+  shap_explainer:
+    enabled: true
+  sampling_shap:
+    enabled: true
+  kernel_shap:
+    enabled: true
+  original_shapg:
+    enabled: true
+    params:
+      corr_method: cosine
+      depth: 1
+      n_samples: 3
+  improved_shapg:
+    enabled: true
+    params:
+      corr_method: cosine
+      sim_method: cosine
+      density_ratio: 0.1381
+
+evaluation:
+  drop_limit: 14
+  weighted_slope_beta: 0.8
+
+seed: 42
+n_runs: 10
+
+plot:
+  figsize: [12, 7]
+  dpi: 300
+  format: [pdf]

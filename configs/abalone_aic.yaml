@@ -1,0 +1,47 @@
+# Experiment: Abalone dataset with AIC characteristic function
+dataset: abalone
+
+model:
+  type: LinearRegression
+  params: {}
+  train_test_split:
+    test_size: 0.2
+    random_state: 42
+
+characteristic_function: aic
+
+explainers:
+  exact_cis:
+    enabled: true
+  exact_shapley:
+    enabled: true
+  shap_explainer:
+    enabled: true
+  sampling_shap:
+    enabled: true
+  kernel_shap:
+    enabled: true
+  original_shapg:
+    enabled: true
+    params:
+      corr_method: cosine
+      depth: 1
+      n_samples: 3
+  improved_shapg:
+    enabled: true
+    params:
+      corr_method: cosine
+      sim_method: cosine
+      density_ratio: 0.9108
+
+evaluation:
+  drop_limit: 7
+  weighted_slope_beta: 0.8
+
+seed: 42
+n_runs: 10
+
+plot:
+  figsize: [10, 6]
+  dpi: 300
+  format: [pdf]
